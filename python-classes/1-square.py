@@ -7,6 +7,7 @@ You are not allowed to import any module"""
 
 
 class Square:
+    """Class Square"""
 
     def __init__(self, size):
         """__init__
