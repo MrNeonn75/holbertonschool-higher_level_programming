@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """
-
+s
 A Square Class
-
+a
 """
 
 
