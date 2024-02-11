@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+""" Module is documented """
+
+
 class BaseGeometry:
     """ Class that defines the attributes of Geometric Shapes """
 
