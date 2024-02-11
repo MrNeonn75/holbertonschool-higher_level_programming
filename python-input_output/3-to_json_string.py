@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+""" Module is documented """
+
+
 from json import dumps
 """ Module is documented """
 
