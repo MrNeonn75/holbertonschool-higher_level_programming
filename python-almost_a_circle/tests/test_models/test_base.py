@@ -58,6 +58,17 @@ class TestBase(unittest.TestCase):
         self.assertEqual(base_instance.id, 'Monty Python')
         base_instance = Base('Python is cool')
         self.assertEqual(base_instance.id, 'Python is cool')
+        
+    def test_to_json(self):
+        """
+        test to json
+        """
+        dict1 = {'id': 1, 'x': 2, 'size': 10, 'y': 1}
+        dict2 = {'id': 89, 'x': 0, 'size': 4, 'y': 3}
+        json_string = Base.to_json_string([dict1, dict2])
+        jload = json.loads(json_string)
+        self.assertEqual(jload, [dict1, dict2])
+        self.assertTrue(isinstance(json_string, str))
 
     def test_to_json_string(self):
         """
@@ -182,3 +193,10 @@ class TestBase(unittest.TestCase):
         json_test = '[{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]'
         json_str = Base.from_json_string(json_test)
         self.assertTrue(isinstance(json_str, list))
+
+
+    def test_from_json_to_str_2(self):
+        """
+        from json to string 2
+        """
+        self.assertEqual(Base.from_json_string(None), [])
