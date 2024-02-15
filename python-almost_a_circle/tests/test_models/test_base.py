@@ -59,16 +59,7 @@ class TestBase(unittest.TestCase):
         base_instance = Base('Python is cool')
         self.assertEqual(base_instance.id, 'Python is cool')
         
-    def test_to_json(self):
-        """
-        test to json
-        """
-        dict1 = {'id': 1, 'x': 2, 'size': 10, 'y': 1}
-        dict2 = {'id': 89, 'x': 0, 'size': 4, 'y': 3}
-        json_string = Base.to_json_string([dict1, dict2])
-        jload = json.loads(json_string)
-        self.assertEqual(jload, [dict1, dict2])
-        self.assertTrue(isinstance(json_string, str))
+    
 
     def test_to_json_string(self):
         """
