@@ -174,3 +174,11 @@ class TestBase(unittest.TestCase):
             "create() takes 1 positional argument but 2 were given",
             str(msg.exception)
         )
+        
+    def test_from_json_to_str(self):
+        """
+        from json to string
+        """
+        json_test = '[{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]'
+        json_str = Base.from_json_string(json_test)
+        self.assertTrue(isinstance(json_str, list))
