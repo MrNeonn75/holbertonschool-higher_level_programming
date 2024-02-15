@@ -61,12 +61,12 @@ class TestBase(unittest.TestCase):
 
     def test_to_json_string(self):
         """
-        Test the to_json_string method
+        to_json_string method test
         """
-        rect_instance = Rectangle(10, 7, 2, 8, 70)
-        rect_data = re1.to_dictionary()
-        json_data = Base.to_json_string([rect_data])
-        self.assertEqual(type(json_data), str)
+        rect1 = Rectangle(4, 8, 15, 16)
+        list_dict = rect1.to_dictionary()
+        json_dict = Base.to_json_string([list_dict])
+        self.assertEqual(str(type(json_dict)), "<class 'str'>")
 
     def test_empty_to_json_string(self):
         """
