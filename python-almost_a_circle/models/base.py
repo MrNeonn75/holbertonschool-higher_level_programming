@@ -1,24 +1,18 @@
 #!/usr/bin/python3
-'''
-Create a folder named models with an empty file __init__.py
-inside - with this file, the folder will become a Python module
-'''
 
+"""
+    The ``1. Base class`` module
+"""
 import json
-import csv
 
 
 class Base:
-    '''
-    Base class
-    '''
-
+    """
+        Base class
+    """
     __nb_objects = 0
 
     def __init__(self, id=None):
-        '''
-        Constructor
-        '''
         if id is not None:
             self.id = id
         else:
@@ -27,100 +21,75 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        '''
-        Turn dictionary representation
-        into JSON
-        '''
-        if list_dictionaries is None:
+        """
+            Function that returns the JSON string representation
+            of list_dictionaries
+        """
+        if list_dictionaries is None or len(list_dictionaries) == 0:
             return "[]"
         return json.dumps(list_dictionaries)
 
     @staticmethod
     def from_json_string(json_string):
-        '''
-        Returns list of
-        dictionaries from JSON
-        '''
-        if json_string is None:
+        """
+            Function that returns the list of the JSON string
+            representation json_string
+        """
+        if json_string is None or not json_string:
             return []
         return json.loads(json_string)
 
     @classmethod
     def save_to_file(cls, list_objs):
-        '''
-        Saves JSON of dictionary
-        to a file <Class name>.json
-        '''
-        listdict = []
-        if not list_objs:
-            list_objs = []
-        for items in list_objs:
-            listdict.append(items.to_dictionary())
-
-        with open('{}.json'.format(cls.__name__), 'w', encoding='utf-8') as f:
-            f.write(cls.to_json_string(listdict))
+        """
+            Function that writes the JSON string
+            representation of list_objs to a file
+        """
+        list_dictionaries = None
+        if list_objs is not None:
+            list_dictionaries = []
+            for i in list_objs:
+                list_dictionaries.append(i.to_dictionary())
+        with open("{}.json".format(cls.__name__), "w", encoding="utf-8") as f:
+            f.write(cls.to_json_string(list_dictionaries))
+        f.close()
 
     @classmethod
     def create(cls, **dictionary):
-        '''
-        Returns instance with
-        all attributes set
-        '''
-        if cls.__name__ is 'Rectangle':
-            newInstance = cls(1, 1)
-            newInstance.update(**dictionary)
-            return newInstance
-        if cls.__name__ is 'Square':
-            newInstance = cls(1)
-            newInstance.update(**dictionary)
-            return newInstance
-        else:
-            return None
+        """
+            Function that returns an instance with all
+            attributes already set
+        """
+        from models.rectangle import Rectangle
+        from models.square import Square
+        if cls is Square:
+            new_instance = Square(3)
+        if cls is Rectangle:
+            new_instance = Rectangle(3, 5)
+        try:
+            new_instance.update(**dictionary)
+        except Exception:
+            pass
+        return new_instance
 
     @classmethod
     def load_from_file(cls):
-        '''
-        Returns a list
-        of instances
-        '''
-        instanceList = []
+        """
+            Function that returns a list of instances
+        """
+        new_list = []
         try:
-            with open('{}.json'.format(cls.__name__), 'r',
-                      encoding='utf-8') as f:
-                objectList = cls.from_json_string(f.read())
-        except IOError:
-            return []
-        for dictionary in objectList:
-            instanceList.append(cls.create(**dictionary))
-        return instanceList
-
-    @classmethod
-    def save_to_file_csv(cls, list_objs):
-        '''
-        Wrte to csv
-        '''
-        listToDictionary = []
-        if list_objs is not None:
-            list_objs = []
-        for items in list_objs:
-            listToDictionary.append(items.to_dictionary())
-
-        with open('{}.csv'.format(cls.__name__), 'w', encoding='utf-8') as f:
-            writer = csv.writer(f)
-            writer.writerows(list_objs)
-
-    @classmethod
-    def load_from_file_csv(cls):
-        '''
-        Returns a list
-        of instances
-        '''
-        instanceList = []
-        try:
-            with open('{}'.format(cls.__name__), 'r', encoding='utf-8') as f:
-                objectList = cls.from_json_string(f.read())
-        except IOError:
-            return []
-        for dictionary in objectList:
-            instanceList.append(cls.create(**dictionary))
-        return instanceList
+            with open("{}.json".format(cls.__name__),
+                      "r", encoding="utf-8") as f:
+                read_data = f.read()
+                list_json = cls.from_json_string(read_data)
+                try:
+                    for dictionary in list_json:
+                        new_list.append(cls.create(**dictionary))
+                except Exception:
+                    pass
+            f.close()
+        except Exception:
+            pass
+        finally:
+            return new_list
