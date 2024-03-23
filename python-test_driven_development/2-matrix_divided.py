@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # 2-matrix_divided.py
-# Carlos Barros <1543@holbertonschool.com>
+
 """ File name : 2-matrix_divided.py
     Divide a matrix: Divides all elements of a matrix
     Prototype: def matrix_divided(matrix, div)

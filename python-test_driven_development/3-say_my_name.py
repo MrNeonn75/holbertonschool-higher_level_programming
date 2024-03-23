@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # 3-say_my_name.py
-# Carlos Barros <1543@holbertonschool.com>
+
 """ File name : 3-say_my_name.py
     Say my name: function that prints My name is <first name> <last name>
     Prototype: def say_my_name(first_name, last_name="")
