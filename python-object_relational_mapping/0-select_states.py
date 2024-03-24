@@ -26,7 +26,7 @@ def main():
     cursor = server.cursor()
     
     # A variable which we save request query
-    query = "SELECT * FROM states ORDER BY states.id"
+    query = "SELECT * FROM states"
     
     # Execute MySQL command
     cursor.execute(query)
