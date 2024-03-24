@@ -1,17 +1,17 @@
 #!/usr/bin/python3
 
 """
-Lists all states from the database hbtn_0e_0_usa.
+Lists all states with a name starting with N (upper N) from the database hbtn_0e_0_usa.
 """
 
 import sys
 import MySQLdb
 
 def main():
-    # Variables for getting arguments
+    # The variables for getting data.
     username = sys.argv[0]
     password = sys.argv[1]
-    database_name = sys.argv[2]
+    database = sys.argv[2]
     
     # Connect to MySQL server
     server = MySQLdb.connect(
@@ -19,29 +19,30 @@ def main():
         port = 3306,
         user = username,
         passwd = password,
-        db = database_name,
+        db = database,
         charset = "utf8"
     )
     
-    # A variable which we can use for working with server
+    # Cursor
     cursor = server.cursor()
     
-    # A variable which we save request query
-    query = "SELECT * FROM states ORDER BY states.id"
+    # Query
+    query = "SELECT * FROM states WHERE naem LIKE 'N%' ORDER BY states.id"
     
-    # Execute MySQL command
+    # Send request
     cursor.execute(query)
     
-    # Get all rows
-    results = cursor.fetchall()
+    # Get result
+    result = cursor.fetchall()
     
-    # Display the result 
-    for data in results:
+    # Print result
+    for data in result:
         print(data)
-        
+    
     # Close connection
     cursor.close()
     server.close()
-
+    
 if (__name__ == "__main__"):
     main()
+    
