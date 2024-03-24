@@ -13,6 +13,8 @@ import MySQLdb
 
 
 def main():
+   """ Main function """
+    
     conn = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -24,11 +26,10 @@ def main():
     
     cur = conn.cursor()
     search = sys.argv[4]
-    cur.execute("SELECT id,name FROM states where name = %s ORDER by id ASC", (search,))
+    cur.execute("SELECT * FROM `states`", (search,))
     row = cur.fetchall()
     
-    for r in row:
-        print(r)
+    [print(state) for state in cur.fetchall() if state[1] == argv[4]]
         
     cur.close()
     conn.close()

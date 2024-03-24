@@ -10,6 +10,8 @@ import MySQLdb
 
 
 def main():
+   """ Main function """
+   
    conn = MySQLdb.connect(
       host="localhost",
       port=3306,
@@ -23,8 +25,7 @@ def main():
    cur.execute(query)
    row = cur.fetchall()
    
-   for r in row:
-      print(r)
+   [print(c) for c in cur.fetchall()]
    
    cur.close()
    conn.close()

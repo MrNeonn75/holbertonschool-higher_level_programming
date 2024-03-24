@@ -11,6 +11,8 @@ import MySQLdb
 
 
 def main():
+   """ Main function """
+   
    conn = MySQLdb.connect(
       host="localhost",
       port=3306,
@@ -26,8 +28,7 @@ def main():
    row = cur.fetchall()
    re = ""
     
-   for r in row:
-      re += r[0] + ", "
+   print(", ".join([c[2] for c in cur.fetchall() if c[4] == argv[4]]))
         
    print(re[0:-2:])
     
