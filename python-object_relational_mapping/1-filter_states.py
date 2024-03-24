@@ -19,15 +19,14 @@ def main():
         port = 3306,
         user = username,
         passwd = password,
-        db = database,
-        charset = "utf8"
+        db = database
     )
     
     # Cursor
     cursor = server.cursor()
     
     # Query
-    query = "SELECT * FROM states WHERE naem LIKE 'N%' ORDER BY states.id"
+    query = "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY states.id"
     
     # Send request
     cursor.execute(query)

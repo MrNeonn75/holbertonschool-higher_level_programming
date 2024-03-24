@@ -19,8 +19,7 @@ def main():
         port = 3306,
         user = username,
         passwd = password,
-        db = database_name,
-        charset = "utf8"
+        db = database_name
     )
     
     # A variable which we can use for working with server
